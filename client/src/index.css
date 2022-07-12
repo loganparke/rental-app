@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+:root {
+  --clr: #F5F5F5;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+/* login CSS  */
+.toggleElement1 {
+  position: absolute;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: 15px;
+  transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.175);
+}
+
+
+.toggleElement2 {
+  position: absolute;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  border-radius: 15px;
+  transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.175);
+}
+
+.toggleBtn1:focus {
+  transition: 0.8s;
+  transform: rotateY(0deg);
+}
+
+.toggleBtn2:focus {
+  transition: 0.8s;
+  transform: rotateY(360deg);
+}
+
+/* guide mobile navigation here to line 150*/
+.navigation {
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  position: relative;
+  width: full;
+  height: 80px;
+  background: #fff;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.navigation ul{
+  display: flex;
+  width:  100%;
+}
+
+.navigation ul li{
+  position: relative;
+  list-style: none;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.navigation ul li button{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+}
+
+.navigation ul li button .icon{
+  position: relative;
+  display: block;
+  line-height: 75px;
+  font-size: 1.5em;
+  text-align: center;
+  transition: 0.5s;
+  color: var(black);
+}
+.navigation ul li.active{
+}
+
+.navigation ul li.active button .icon{
+  transform: translateY(-20px);
+}
+
+
+.navigation ul li button .text{
+  position: absolute;
+  color: var(black);
+  font-weight: 400;
+  font-size: 0.75em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.navigation ul li.active button .text{
+  opacity: 1;
+  transform: translateY(10px);
+}
+
+.indicator{
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background: #189be7;
+  border: 6px solid var(--clr);
+  transition: 0.5s;
+}
+
+
+.navigation ul li:nth-child(1).active ~ .indicator{
+  left: 0px;
+}
+
+.navigation ul li:nth-child(3).active ~ .indicator{
+  left: 25%;
+} 
+
+.navigation ul li:nth-child(5).active ~ .indicator{
+  left: 50%;
+}
+.navigation ul li:nth-child(7).active ~ .indicator{
+  left: 75%;
+} 
+
+/* GUIDE HOME CSS */
+.guideHomebg{
+  opacity: 0.2;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+}
+.guideHome{
+  position: relative;
+  opacity: 1;
+  color: black;
+}
