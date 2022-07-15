@@ -15,6 +15,8 @@ function Guides() {
     return;
   }
 
+  // "/dashboard/addGuide"
+
 return (
   <div className="text-3lx font-bold bg-gray-100">
 

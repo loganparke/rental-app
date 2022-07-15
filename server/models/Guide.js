@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const Category = require('./Category');
+const categorySchema = require('./Category');
 
 const guideSchema = new Schema({
   name: {
     type: String,
     required: true,
     trim: true,
-    unique: true,
     maxlength: 40
   },
   address: {
@@ -22,12 +21,7 @@ const guideSchema = new Schema({
     type: String
   },
   //things like 'contact info'  'wifi info'
-  categories: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Category'
-    }
-  ]
+  categories: [categorySchema]
 });
 
 const Guide = mongoose.model('Guide', guideSchema);

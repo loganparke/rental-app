@@ -7,7 +7,6 @@ const categorySchema = new Schema({
     type: String,
     required: true,
     trim: true,
-    unique: true,
     maxlength: 40
   },
   description:{
@@ -17,6 +16,4 @@ const categorySchema = new Schema({
   }
 });
 
-const Category = mongoose.model('Category', categorySchema);
-
-module.exports = Category;
+module.exports = categorySchema;

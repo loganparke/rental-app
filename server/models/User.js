@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-
 const { Schema } = mongoose;
 const bcryptjs = require('bcryptjs');
+const subscriptionSchema = require('./Subscription');
 
 const userSchema = new Schema({
   username: {
@@ -16,20 +16,17 @@ const userSchema = new Schema({
     unique: true,
     maxlength: 40
   },
+  phone: {
+    type: String,
+    maxLength: 12
+  },
   password: {
     type: String,
     required: true,
     minlength: 3,
     maxlength: 40
   },
-  subscription: [
-    [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Subscription'
-      }
-    ]
-  ],
+  subscription: [subscriptionSchema],
   subscriptionStatus: {
       type: Boolean
   },
