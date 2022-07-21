@@ -5,6 +5,8 @@ import Guides from "../components/dashboard/guides";
 import Messages from '../components/dashboard/messages';
 import Account from '../components/dashboard/account';
 
+import auth from '../utils/auth';
+
 import { useQuery } from '@apollo/client';
 import { QUERY_USER } from "../utils/queries";
 import { SET_USER } from '../utils/actions';
@@ -12,6 +14,7 @@ import { SET_USER } from '../utils/actions';
 export const DasboardContext = React.createContext();
 
 function Dashboard() {
+
   //dashboardContext state variable
   const [dash, setDash] = useState('guides');
 

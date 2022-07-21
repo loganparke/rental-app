@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import auth from "../../../utils/auth";
 import { DasboardContext } from "../../../pages/Dashboard";
 
 function DasboardNav() {
@@ -19,6 +20,10 @@ function DasboardNav() {
     }
   }
 
+  const handleLogout = () => {
+    auth.logout();
+  }
+
   return (
     <nav className="w-full bg-cyan-900 p-5 flex flex-wrap justify-between border-b-8 border-cyan-200"> 
     <div className="flex flex-wrap"> 
@@ -31,7 +36,7 @@ function DasboardNav() {
     </div>
 
     <div>
-      <button className="font-bold text-white p-2 mx-5">Log Out</button>
+      <button onClick={handleLogout} className="font-bold text-white p-2 mx-5">Log Out</button>
     </div>
     </nav>
   );

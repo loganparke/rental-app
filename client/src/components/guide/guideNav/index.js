@@ -3,7 +3,7 @@ import { GuideContext } from "../../../pages/guide";
 
 function GuideNav() {
 
-  const { guideComp, setGuideComp } = useContext(GuideContext);
+  const { guideComponent, setGuideComponent } = useContext(GuideContext);
   const home = useRef();
   const guide = useRef();
   const map = useRef();
@@ -14,19 +14,19 @@ function GuideNav() {
         guide.current.classList.remove('active');
         map.current.classList.remove('active');
         home.current.classList.add('active');
-        setGuideComp('guideHome');
+        setGuideComponent('guideHome');
         return;
       case 'guideInfo':
         guide.current.classList.add('active');
         map.current.classList.remove('active');
         home.current.classList.remove('active');
-        setGuideComp('guideInfo');
+        setGuideComponent('guideInfo');
         return;
       case 'guideMap':
         guide.current.classList.remove('active');
         map.current.classList.add('active');
         home.current.classList.remove('active');
-        setGuideComp('guideMap');
+        setGuideComponent('guideMap');
         return;
     }
   }
@@ -35,7 +35,7 @@ function GuideNav() {
     <div className='fixed
     inset-x-0
     bottom-0'>
-      <div className="navigation fixed  bottom-0"> 
+      <div className="navigation fixed w-full bottom-0"> 
         <ul>
             <li className="list active" ref={home}>
               <button onClick={() => handleNavClick('guideHome')}>

@@ -28,7 +28,7 @@ const userSchema = new Schema({
   },
   subscription: [subscriptionSchema],
   subscriptionStatus: {
-      type: Boolean
+      type: String
   },
   guides: [
     {

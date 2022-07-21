@@ -21,6 +21,9 @@ import Footer from './components/footer';
 import GuideInsights from './components/dashboard/guideInsights/guideInsights';
 import EditGuide from './components/dashboard/editGuide/editGuide';
 import AddGuide from './components/dashboard/addGuide/addGuide';
+import AddSubscription from './pages/addSubscription';
+
+import Protected from './utils/Protected';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
@@ -45,7 +48,7 @@ function App() {
 return (
   <ApolloProvider client={client}>
   <StoreProvider>
-    <div className="App bg-gray-100  min-h-screen">
+    <div className="App bg-gray-100">
       <Router>
         <Routes>
           <Route 
@@ -53,29 +56,50 @@ return (
             element={<Home />} 
           />
           <Route 
-            path="/Dashboard" 
-            element={<Dashboard />} 
-          />
-          <Route 
             path="/login" 
             element={<LoginSignup />} 
           />
           <Route 
-            path="/guideId/guide" 
+            path="/user/:userId/guide/:guideId" 
             element={<Guide />} 
           />
-          <Route
-            path="/guideId/insights"
-            element={<GuideInsights />}
-          />
-          <Route
-            path="/guideId/edit"
-            element={<EditGuide />}
-          />
-          <Route
-            path="/dashboard/addGuide"
-            element={<AddGuide />}
-          />
+          
+            <Route 
+              path="/Dashboard" 
+              element={
+                <Protected>
+                  <Dashboard />
+                </Protected>
+              } 
+            />
+            <Route
+              path="/guideId/insights"
+              element={
+                <Protected>
+                  <GuideInsights />
+                </Protected>}
+            />
+            <Route
+              path="/dashboard/guide/edit/:guideId"
+              element={
+                <Protected>
+                  <EditGuide />
+                </Protected>}
+            />
+            <Route
+              path="/dashboard/addGuide"
+              element={
+                <Protected>
+                  <AddGuide />
+                </Protected>}
+            />
+            <Route
+              path="/dashboard/addSubscription"
+              element={
+                <Protected>
+                  <AddSubscription />
+                </Protected>}
+            />
         </Routes>
       </Router>
       <Footer/>

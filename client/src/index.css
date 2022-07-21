@@ -58,12 +58,14 @@ code {
   position: relative;
   width: full;
   height: 80px;
-  background: #fff;
+  background-color: rgb(15 118 110);
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: wheat;
 }
 
 .navigation ul{
@@ -127,8 +129,8 @@ code {
   position: absolute;
   width: 25%;
   height: 100%;
-  background: #189be7;
-  border: 6px solid var(--clr);
+  background-color: rgb(17 94 89);
+  /* border: 6px solid var(--clr); */
   transition: 0.5s;
 }
 
@@ -150,15 +152,28 @@ code {
 
 /* GUIDE HOME CSS */
 .guideHomebg{
-  opacity: 0.2;
+  opacity: 0.3;
   position: absolute;
   left: 0;
   top: 0;
-  width: 100%;
-  height: auto;
+  display: block;
+  z-index: -10;
 }
+
+.guideHomeFront{
+  display: block;
+  z-index: 10;
+}
+
 .guideHome{
   position: relative;
   opacity: 1;
   color: black;
+}
+
+
+/* input css */
+input[type=text] {
+  word-wrap: break-word;
+  word-break: break-all;
 }

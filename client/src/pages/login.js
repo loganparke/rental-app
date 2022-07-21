@@ -41,7 +41,6 @@ function LoginSignup () {
   const handleLoginFormSubmit = async (event) => {
     try {
       const mutationResponse = await login({
-        
         variables: {
           email: loginFormState.email,
           password: loginFormState.password,
@@ -49,6 +48,9 @@ function LoginSignup () {
       });
       const token = mutationResponse.data.login.token;
       Auth.login(token);
+      if(Auth.loggedIn) {
+        window.location.replace("/dashboard");
+      }
     } catch (e) {
       console.log(e);
     }
@@ -67,8 +69,10 @@ function LoginSignup () {
     uname: "",
     eml: "",
     psw: "",
+    subscriptionStatus: "false"
   });
   const [addUser] = useMutation(ADD_USER);
+  console.log(signupFormState);
 
   const handleSignupFormSubmit = async (event) => {
     console.log('hi')
@@ -77,14 +81,17 @@ function LoginSignup () {
         username: signupFormState.uname,
         email: signupFormState.eml,
         password: signupFormState.psw,
-        phone: signupFormState.phone
+        phone: signupFormState.phone,
+        subscriptionStatus: signupFormState.subscriptionStatus
       },
     });
-    console.log('2')
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
+    if(Auth.loggedIn) {
+      window.location.replace("/dashboard");
+    }
   };
-
+  
   const handleSignupChange = (event) => {
     const { name, value } = event.target;
     setSignupFormState({

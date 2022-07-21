@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import Subscription from "./subscription";
 import Notifications from "./notification";
 import Settings from "./settings";
+import cabinIcon from '../../../assets/cabinIcon.png'
+
+import { useStoreContext } from '../../../utils/GlobalState';
 
 function Account() {
+  const [state, dispatch] = useStoreContext();
 
   const [accountNav, setAccountNav] = useState('subscription');
 
@@ -28,7 +32,6 @@ function Account() {
       case 'subscription':
         return <Subscription />;
       case 'notifications':
-        console.log('retuns notis')
         return <Notifications />;
       case 'settings':
         return <Settings />;
@@ -40,20 +43,20 @@ function Account() {
 return (
   <div id="profile-top" className="pt-5 bg-white" >
     <div className="flex flex-wrap mt-5 w-5/6 m-auto">
-          <img className="w-1/4" src="https://cdn-icons-png.flaticon.com/512/195/195492.png" />
+          <img className="w-1/4" src={cabinIcon} />
     <div className="flex flex-wrap w-3/4 justify-between">
       <div className="flex flex-wrap w-full justify-between">
-        <h1 className="pl-5">Username here</h1>
+        <h1 className="pl-5">{state?.user?.username}</h1>
         <button className="bg-gray-100 rounded-full h-10 px-4">Edit Profile</button>
       </div>
       <div className="w-full flex">
         <div className="w-1/2">
           <p>guest Contact phone:</p>
-          <p>555-555-5555</p>
+          <p>{state?.user?.phone}</p>
         </div>
         <div className="w-1/2">
           <p >guest contact email:</p>
-          <p>email@email.com</p>
+          <p>{state?.user?.email}</p>
         </div>
         
       </div>

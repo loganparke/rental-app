@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const categorySchema = require('./Category');
+const poiSchema = require('./POI');
 
 const guideSchema = new Schema({
   name: {
@@ -21,7 +22,8 @@ const guideSchema = new Schema({
     type: String
   },
   //things like 'contact info'  'wifi info'
-  categories: [categorySchema]
+  categories: [categorySchema],
+  poi: [poiSchema]
 });
 
 const Guide = mongoose.model('Guide', guideSchema);

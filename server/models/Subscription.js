@@ -2,12 +2,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const subscriptionSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-    maxlength: 40
-  },
   propertiesAllowed: {
     type: Number,
     required: true,
@@ -19,6 +13,9 @@ const subscriptionSchema = new Schema({
   endDate: {
     type: Date,
     default: Date.now,
+  },
+  price: {
+    type: Number
   }
 })
 

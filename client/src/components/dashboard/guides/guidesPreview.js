@@ -1,12 +1,13 @@
 import React from "react";
 import { useStoreContext } from '../../../utils/GlobalState';
 
+
+// Guide preview does a map over the guides a user has and returns a component to the main dashboard for users to interact with, including buttons that take users to other pages where they can look at their guide in more detail
+
 function GuidesPreview() {
   const [state, dispatch] = useStoreContext();
 
-  console.log(state);
   return (
-    //hardcoded for now but will call the API to display selected info with a map function of the data
     <>
     {state.user && state.user.guides.length ? (
     <div>
@@ -24,8 +25,8 @@ function GuidesPreview() {
               <p id="invite/share" className="p-3">✉ Share Guide</p>
             </div>
             <div className="w-2/6 flex flex-wrap">
-              <a href="/guideId/guide" target="blank" id="preview" className="my-1 p-3 bg-cyan-400 text-white rounded-full">See Guide</a>
-              <a href="/guideId/edit" id="edit" className="my-1 p-3 bg-cyan-400 text-white rounded-full">Edit Guide</a>
+              <a href={"/user/" + state?.user?._id + "/guide/" + guide._id} target="blank" id={guide._id} className="my-1 p-3 bg-cyan-400 text-white rounded-full">See Guide</a>
+              <a href={"/dashboard/guide/edit/" + guide._id} id="edit" className="my-1 p-3 bg-cyan-400 text-white rounded-full">Edit Guide</a>
               <a href="/guideId/insights" id="insights" className="my-1 p-3 bg-cyan-400 text-white rounded-full">Guide insights</a>
             </div>
           </div>

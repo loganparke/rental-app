@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from '@apollo/client';
-import { ADD_GUIDE } from '../../../utils/mutations';
+import { ADD_GUIDE, ADD_POI } from '../../../utils/mutations';
 
 function AddGuide() {
 
@@ -12,14 +12,12 @@ function AddGuide() {
       ...formState,
       [name]: value,
     });
-    console.log(formState);
   };
 
   const [addGuide] = useMutation(ADD_GUIDE);
+  const [addPoi] = useMutation(ADD_POI);
   const handleFormSubmit = async (event) => {
-    console.log('hi');
     try {
-      console.log('hello')
       const guide = await addGuide({
         variables: {
           name: formState.name,
@@ -28,8 +26,27 @@ function AddGuide() {
           contactPhone: formState.phone,
         },
       });
-      console.log('new guide below')
-      console.log(guide);
+
+      let geocodeAddress = guide.data.addGuide.address.split(' ').join('%20').concat('&');
+
+        const newLocation = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${geocodeAddress}key=`)
+        .then(Response => Response.json())
+        .then((data) => {
+          console.log(data);
+          const newLatLong = data.results[0].geometry.location;
+          return newLatLong;
+        })
+        .catch((err) => console.log(err));
+        const guideId = guide.data.addGuide._id
+      const addPoiResponse = await addPoi({
+        variables: {
+          guideId: guideId,
+          name: 'home',
+          lat: newLocation.lat,
+          lng: newLocation.lng
+        }
+      });
+      console.log(addPoiResponse);
       if(guide) {
         window.location.replace("/dashboard");
       }
