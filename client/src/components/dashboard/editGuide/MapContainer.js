@@ -1,65 +1,56 @@
-import React from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import React, { useState } from 'react';
+import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api';
 import { useStoreContext } from '../../../utils/GlobalState';
-import Marker from './marker';
+import homeMarker from '../../../assets/homeMarker.png'
 
 // NEED TO ADD LAT AND LNG TO GUIDE SCHEMA AND USE GLOBAL STATE TO GET LAT AND LNG IN THIS COMPONOENT, STOP USING PROPS
 const MapContainer = ({pois}) => {
   const [state] = useStoreContext();
-  //console.log(pois)
+
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: 'AIzaSyCnd1TuJv-z-dpDnNruxMPm8WN8BYYaMkA',
+  })
+
+  const [map, setMap] = useState( /** @type google.maps.map */ (null));
+  
 
   const home = pois?.find(({ name }) => name === 'home');
-  const homeLatLng = {lat: home?.lat, lng: home?.lng}
-  console.log(homeLatLng);
 
-  const mapStyles = {        
-    height: "350px",
-    width: "100%"
-  };
-  
+  const homeLatLng = {lat: home?.lat, lng: home?.lng};
   const defaultCenter = {
-    lat: home?.lat || 10, lng: home?.lng || 10
-    //lat:10, lng:10
+    lat: parseFloat(home?.lat) || 10, lng: parseFloat(home?.lng) || 10
   }
-  // console.log('default center', defaultCenter);
-  const locations = [
-    {
-      name: "Location 1",
-      location: { 
-        lat: 44.4451,
-        lng: 111.6734 
-      },
-    },
-    {
-      name: "Location 2",
-      location: { 
-        lat: 44.4351,
-        lng: 111.5934
-      },
-    }
-  ];
 
+  if(!isLoaded) {
+    return <div> map is loading </div>
+  }
+  
   return (
-    <LoadScript
-      googleMapsApiKey='AIzaSyDzUiDXLmgKTJ0bS6E2MetMhgTUZbxPSx8'>
-        <GoogleMap
-          mapContainerStyle={mapStyles}
-          zoom={13}
-          center={defaultCenter}>
-            <Marker
-            lat={home?.lat}
-            lng={home?.lng}
-            name="My Marker"
+    <GoogleMap center={defaultCenter} zoom={11} mapContainerStyle={{width: '100%', height: '350px'}}
+    onLoad={(map) => setMap(map)}
+    options={{
+      fullscreenControl: false
+    }}
+    >
+      <Marker position={defaultCenter}/>
+      {pois?.map((place) => {
+        if(place.name === 'home') {
+          return(
+            <Marker key={place._id} position={place}/>
+          )
+        }
+        return (
+          <Marker key={place._id} position={place}
+          icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" 
           />
-          {/* {
-            locations.map(item => {
-              return (
-              <Marker key={item.name} position={item.location}/>
-              )
-            })
-          } */}
-        </GoogleMap>
-    </LoadScript>
+        )
+      })}
+      <div className='w-full h-full flex justify-between'>
+        <p></p>
+        <button onClick={() => map.panTo(defaultCenter)} className='centerMapButton bg-gray-50 shadow-lg p-2 m-3 z-20 h-8 grid content-center rounded-sm'><p className='centerMapButtonIcon text-lg'>➤</p></button>
+      </div>
+      
+    </GoogleMap>
   )
 }
 export default MapContainer;

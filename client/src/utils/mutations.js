@@ -51,6 +51,7 @@ export const UPDATE_GUIDE_TITLE = gql`
       _id
       name
       description
+      icon
     }
   }
 }
@@ -68,9 +69,35 @@ export const UPDATE_GUIDE_ADDRESS = gql`
       _id
       name
       description
+      icon
     }
   }
 }
+`;
+
+export const DELETE_GUIDE = gql`
+  mutation deleteGuide($guideId: ID!) {
+    deleteGuide(guideId: $guideId) {
+      _id
+      username
+      email
+      phone
+      subscription{
+        _id
+        propertiesAllowed
+        startDate
+        endDate
+        price
+      }
+      subscriptionStatus
+      guides {
+        _id
+        name
+        address
+        photo
+      }
+    }
+  }
 `;
 
 export const ADD_CATEGORY = gql`
@@ -85,6 +112,7 @@ export const ADD_CATEGORY = gql`
       _id
       name
       description
+      icon
     }
   }
 }
@@ -102,6 +130,7 @@ export const UPDATED_CATEGORY = gql`
         _id
         name
         description
+        icon
       }
     }
 }
@@ -119,14 +148,15 @@ export const DELETE_CATEGORY = gql`
       _id
       description
       name
+      icon
     }
   }
 }
 `;
 
 export const ADD_POI = gql`
-  mutation addPoi($guideId: ID!, $name: String, $lat: Float, $lng: Float){
-    addPoi(guideId: $guideId, name: $name, lat: $lat, lng: $lng) {
+  mutation addPoi($guideId: ID!, $name: String, $type: String, $address: String, $lat: Float, $lng: Float){
+    addPoi(guideId: $guideId, name: $name, type: $type, address: $address, lat: $lat, lng: $lng) {
         _id
       name
       address
@@ -136,19 +166,23 @@ export const ADD_POI = gql`
         _id
         description
         name
+        icon
       }
       poi{
         _id
         name
+        type
+        address
         lat
         lng
       }
     }
   }
 `;
+
 export const UPDATED_POI = gql`
-  mutation updatePoi($guideId: ID!, $name: String, $lat: Float, $lng: Float){
-    updatePoi(guideId: $guideId, name: $name, lat: $lat, lng: $lng){
+  mutation updatePoi($guideId: ID!, $name: String, $type: String, $address: String, $lat: Float, $lng: Float){
+    updatePoi(guideId: $guideId, name: $name, type: $type, address: $address, lat: $lat, lng: $lng){
         _id
       name
       address
@@ -158,16 +192,46 @@ export const UPDATED_POI = gql`
         _id
         description
         name
+        icon
       }
       poi{
         _id
         name
+        type
+        address
         lat
         lng
       }
     }
   }
 `; 
+
+export const DELETE_POI = gql`
+  mutation deletePoi($guideId: ID!, $poiId: ID!){
+    deletePoi(guideId: $guideId, poiId: $poiId){
+      _id
+      name
+      address
+      contactPhone
+      photo
+      categories {
+        _id
+        description
+        name
+        icon
+      }
+      poi{
+        _id
+        name
+        type
+        address
+        lat
+        lng
+      }
+    }
+  }
+`;
+
 
 
 export const ADD_SUBSRIPTION = gql `

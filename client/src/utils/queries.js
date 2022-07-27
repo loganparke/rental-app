@@ -17,6 +17,7 @@ export const QUERY_USER = gql`
         _id
         name
         description
+        icon
       }
     }
     subscriptionStatus
@@ -43,10 +44,13 @@ export const QUERY_GUIDE = gql`
         _id
         description
         name
+        icon
       }
       poi{
         _id
         name
+        type
+        address
         lat
         lng
       }
@@ -60,6 +64,7 @@ export const QUERY_CLIENT_USER = gql`
     subscriptionStatus
     _id
     username
+    email
 }
 }
 `;

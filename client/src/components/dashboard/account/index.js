@@ -51,11 +51,11 @@ return (
       </div>
       <div className="w-full flex">
         <div className="w-1/2">
-          <p>guest Contact phone:</p>
+          <p className="font-bold">Guest Contact phone:</p>
           <p>{state?.user?.phone}</p>
         </div>
         <div className="w-1/2">
-          <p >guest contact email:</p>
+          <p className="font-bold">Guest contact email:</p>
           <p>{state?.user?.email}</p>
         </div>
         

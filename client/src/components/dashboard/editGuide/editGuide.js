@@ -3,11 +3,12 @@ import { useStoreContext } from '../../../utils/GlobalState';
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_GUIDE } from "../../../utils/queries";
-import { ADD_CATEGORY, DELETE_CATEGORY, UPDATE_GUIDE_TITLE } from '../../../utils/mutations';
+import { ADD_CATEGORY, DELETE_CATEGORY, UPDATE_GUIDE_TITLE, DELETE_GUIDE } from '../../../utils/mutations';
 import { SET_GUIDE } from "../../../utils/actions";
 import RenderModal from "./modal";
 import AddSection from "./addSection";
 import EditAddressComponent from "./editAddress";
+import DeleteGuide from "./deleteGuide";
 
 
 
@@ -23,7 +24,6 @@ function EditGuide() {
       guideId: guideId
     }
   });
-  //console.log(data);
 
   useEffect(() => {
     if (data) {
@@ -33,10 +33,8 @@ function EditGuide() {
       });
     }
   }, [data, loading, dispatch]);
-  console.log(state);
 
-  //console.log(state);
-  //62d86f2bf00bce8031cbd8f5
+
 
     //  TOGGLE ADD SECTION FUNCTIONALITY
     const [activeAddSection, setActiveAddSection] = useState(false);
@@ -99,7 +97,7 @@ function EditGuide() {
 
   return (
     //hardcoded for now but will call the API to display selected info with a map function of the data
-    <div className="bg-gray-300">
+    <div className="bg-gray-300 pb-10">
       <nav className="bg-cyan-800 text-white p-4 flex justify-between">
         <p className="text-3xl">🏕️</p>
         <a href="/Dashboard" className="bg-white p-3 rounded-full text-black">Back to Dashboard</a>
@@ -124,10 +122,16 @@ function EditGuide() {
         <EditAddressComponent guideId={guideId} />
         
         {/* <img alt='house pic' src={guideData.image} className='w-1/4' /> */}
-        <button onClick={showAddSection}>Add Section ➕</button>
+        <div className="flex">
+          <p className="w-1/4"></p>
+          <h3 className="w-1/2">Guide Sections</h3>
+          <button onClick={showAddSection}>Add Section ➕</button>
+        </div>
+        
+        <div className="grid grid-cols-2 mx-5 content-around m-auto">
         {state?.guide?.categories.map((category) => {
           return(
-          <div  key={category._id} className='bg-cyan-700 text-white m-2 rounded flex flex-wrap'>
+          <div  key={category._id} className='bg-cyan-700 text-white m-2 rounded flex flex-wrap py-2'>
             <div className="flex justify-between w-full">
               <p> </p>
               <div className="font-medium">{category.name}</div>
@@ -140,7 +144,7 @@ function EditGuide() {
           </div>
           )
         })}
-        
+        </div>
         {activeModal && (
         <div className="flex flex-wrap absolute top-0 left-0 w-full">
           <RenderModal guideId={guideId} category={currentCategory} setActiveModal={setActiveModal} /> 
@@ -151,7 +155,9 @@ function EditGuide() {
           <div className="absolute top-0 left-0 w-full h-full">
             <AddSection guideId={state?.guide?._id} setActiveAddSection={setActiveAddSection}/>
           </div> )}
+          
       </div>
+      <DeleteGuide />
     </div>
   );
 };

@@ -7,6 +7,8 @@ import { useStoreContext } from '../../../utils/GlobalState';
 function GuidesPreview() {
   const [state, dispatch] = useStoreContext();
 
+
+
   return (
     <>
     {state.user && state.user.guides.length ? (

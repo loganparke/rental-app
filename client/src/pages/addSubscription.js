@@ -3,6 +3,8 @@ import Calendar from 'react-calendar';
 import { formatDate } from "../utils/dateFormat";
 import { useMutation } from '@apollo/client';
 import { ADD_SUBSRIPTION } from "../utils/mutations";
+import StripePage from "../components/stripe/Stripe";
+
 
 function AddSubscription() {
 
@@ -117,6 +119,8 @@ function AddSubscription() {
 
           
       </div>
+
+              <StripePage />
     </div>
   )
 }

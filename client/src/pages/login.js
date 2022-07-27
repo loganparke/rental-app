@@ -72,10 +72,8 @@ function LoginSignup () {
     subscriptionStatus: "false"
   });
   const [addUser] = useMutation(ADD_USER);
-  console.log(signupFormState);
 
   const handleSignupFormSubmit = async (event) => {
-    console.log('hi')
     const mutationResponse = await addUser({
       variables: {
         username: signupFormState.uname,
@@ -98,7 +96,6 @@ function LoginSignup () {
       ...signupFormState,
       [name]: value,
     });
-    console.log(signupFormState);
   };
 
   return (

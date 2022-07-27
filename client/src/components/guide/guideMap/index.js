@@ -1,15 +1,47 @@
 import React, { useState } from "react";
+import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api';
+import { useStoreContext } from "../../../utils/GlobalState";
 
 function GuideMap() {
+  const [state] = useStoreContext();
+  const places = state?.guide?.poi;
+
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: 'AIzaSyCnd1TuJv-z-dpDnNruxMPm8WN8BYYaMkA',
+  })
+
+  const [map, setMap] = useState( /** @type google.maps.map */ (null));
+
+  if(!isLoaded) {
+    return <div>map is loading</div>
+  }
+
+  const defaultCenter = {
+    lat: parseFloat(state?.guide?.poi[0]?.lat) || 10, lng: parseFloat(state?.guide?.poi[0]?.lng) || 10
+  }
 
   return(
-    <div className="w-screen h-5/6">
+    <div className="guideMap w-screen">
     <div className="w-full h-full">
+    <GoogleMap center={defaultCenter} zoom={13} mapContainerStyle={{width: '100%', height: '100%'}}
+    onLoad={(map) => setMap(map)}
+    options={{
+      fullscreenControl: false
+    }}
+    >
+      {places.map((place) => {
+        return(
+          <Marker key={place.name} position={{lat: place.lat, lng: place.lng}} />
+        )
+      })}
+      {/* <Marker position={defaultCenter}/> */}
+      <div className='w-full h-full flex justify-between'>
+        <p></p>
+        <button onClick={() => map.panTo(defaultCenter)} className='centerMapButton bg-gray-50 shadow-lg p-2 m-3 z-50 h-8 grid content-center rounded-sm'><p className='centerMapButtonIcon text-lg'>➤</p></button>
+      </div>
       
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.991574283802!2d-111.94963348429894!3d41.309046908810515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87530b63492a5b9b%3A0x864c738889ba5c70!2s2700%20N%201050%20E%2C%20North%20Ogden%2C%20UT%2084414!5e0!3m2!1sen!2sus!4v1642448367447!5m2!1sen!2sus"
-      className="w-full h-full" 
-      loading="lazy">
-      </iframe>
+    </GoogleMap>
+      
     </div>
     </div>
   )

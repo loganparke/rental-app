@@ -19,15 +19,15 @@ function GuideHome() {
 
           <div className="flex justify-around my-3"> 
             <div className="flex border-b-2">
-              <p className="text-6xl pr-2">✆</p>
+              <a href={'tel:' + state?.guide?.contactPhone} className="text-6xl pr-2">✆</a>
+              <a href={'mailto:' + state?.user?.email}>
               <img className="w-14 h-14 my-2 ml-2" src={emailIcon} alt="phone" />
+              </a>
             </div>
           </div>
           <div className="flex justify-around">
             <p className="w-2/3">{state?.guide?.address}</p>
           </div>
-          
-
         </div>
         
       </div>

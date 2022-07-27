@@ -57,7 +57,7 @@ code {
   z-index: 100;
   position: relative;
   width: full;
-  height: 80px;
+  height: 10%;
   background-color: rgb(15 118 110);
   position: relative;
   display: flex;
@@ -176,4 +176,14 @@ code {
 input[type=text] {
   word-wrap: break-word;
   word-break: break-all;
+}
+
+/* MAP CSS */
+
+.guideMap {
+  height: 90%;
+}
+
+.centerMapButtonIcon {
+  transform: rotate(-45deg);
 }

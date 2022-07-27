@@ -6,11 +6,14 @@ const typeDefs = gql `
     _id: ID
     name: String
     description: String
+    icon: String
   }
 
   type Poi {
     _id: ID
     name: String
+    type: String
+    address: String
     lat: Float
     lng: Float
   }
@@ -64,15 +67,17 @@ const typeDefs = gql `
     addGuide(name: String, address: String, photo: String, contactPhone: String): Guide
     updateGuideTitle(guideId: ID!, name: String): Guide
     updateGuideAddress(guideId: ID!, address: String!): Guide
+    deleteGuide(guideId: ID!): User
     # category inside guide mutations
-    addCategory(guideId: ID!, name: String!, description: String!): Guide
+    addCategory(guideId: ID!, name: String!, description: String!, icon: String): Guide
     updateCategory(guideId: ID!, categoryId: ID! name: String!, description: String!): Guide
     deleteCategory(guideId: ID!, categoryId: ID!): Guide
     # POI inside guide mutations
-    addPoi(guideId: ID!, name: String, lat: Float, lng: Float): Guide
-    updatePoi(guideId: ID!, name: String, lat: Float, lng: Float): Guide
+    addPoi(guideId: ID!, name: String, type: String, address: String, lat: Float, lng: Float): Guide
+    updatePoi(guideId: ID!, name: String, type: String address: String, lat: Float, lng: Float): Guide
+    deletePoi(guideId: ID!, poiId: ID!): Guide
     # subsription mutations
-    addSubscription(propertiesAllowed: Int, startDate: String, endDate: String, price: Int): User
+    addSubscription(propertiesAllowed: Int, type: String startDate: String, endDate: String, price: Int): User
     deleteSubscription(subscriptionId: String!): User
   }
 `;

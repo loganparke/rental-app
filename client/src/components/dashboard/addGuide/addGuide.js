@@ -29,7 +29,7 @@ function AddGuide() {
 
       let geocodeAddress = guide.data.addGuide.address.split(' ').join('%20').concat('&');
 
-        const newLocation = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${geocodeAddress}key=`)
+        const newLocation = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${geocodeAddress}key=AIzaSyCnd1TuJv-z-dpDnNruxMPm8WN8BYYaMkA`)
         .then(Response => Response.json())
         .then((data) => {
           console.log(data);
@@ -42,6 +42,7 @@ function AddGuide() {
         variables: {
           guideId: guideId,
           name: 'home',
+          address: guide.data.addGuide.address,
           lat: newLocation.lat,
           lng: newLocation.lng
         }

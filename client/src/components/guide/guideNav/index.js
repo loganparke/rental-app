@@ -43,7 +43,7 @@ function GuideNav() {
                 <span className="text">Home</span>
               </button>
             </li>
-            <div className='bg-gray-200 mt-3 w-0.5 h-12'></div>
+            <div className='bg-gray-200 mt-3 w-0.5'></div>
             <li className="list" ref={guide}>
               <button  onClick={() => handleNavClick('guideInfo')}>
                 <span className="icon">G</span>

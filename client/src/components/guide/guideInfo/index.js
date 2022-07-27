@@ -23,7 +23,7 @@ function GuideInfo() {
         <>
         {state?.guide?.categories?.map((category) => {
                 return(
-                  <div className="bg-white border-2 border-gray-300 w-full h-52 grid place-items-center rounded-md">
+                  <div key={category._id} className="bg-white border-2 border-gray-300 w-full h-52 grid place-items-center rounded-md">
                     <button onClick={() => showCategory(category)} className='w-5/6'>
                       <img alt="hi" src="https://w7.pngwing.com/pngs/205/544/png-transparent-wifi-symbol-wi-fi-alliance-logo-internet-wifi-modem-icon-miscellaneous-text-symbol.png"/>
                       <h3>{category.name}</h3>

@@ -8,6 +8,12 @@ const poiSchema = new Schema({
     trim: true,
     maxlength: 40
   },
+  type: {
+    type: String
+  },
+  address: {
+    type: String
+  },
   lat:{
     type: Number
   },

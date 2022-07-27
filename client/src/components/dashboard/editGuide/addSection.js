@@ -35,9 +35,9 @@ const AddSection = ({setActiveAddSection, guideId}) => {
   }
 
   return(
-    <div className="absolute w-screen h-screen m-auto top-0 left-0 z-10 text-white">
+    <div className="absolute w-screen h-screen m-auto top-0 left-0 z-30 text-white">
       <div className="bg-gray-600 opacity-30 w-full h-full z-20"></div>
-      <div className="w-full absolute top-0 left-0">
+      <div className="w-full absolute top-0 left-0 z-40">
         <div className=" bg-cyan-600 w-2/3 m-auto my-24 p-5 rounded-xl">
         <div className="flex justify-between">
           <p> </p>
@@ -46,10 +46,10 @@ const AddSection = ({setActiveAddSection, guideId}) => {
         </div>
         <div className="flex flex-wrap">
           <label className="w-full mt-8 flex"> <p className="w-1/3">Title:</p>
-            <input name="title" onChange={handleFormChange}  placeholder="Title" className="mx-2 rounded border-2 border-gray-400 w-2/3"/>
+            <input name="title" onChange={handleFormChange}  placeholder="Title" className="mx-2 rounded border-2 border-gray-400 w-2/3 text-black"/>
           </label>
           <label className="w-full mt-3 flex"><p className="w-1/3">Description:</p> 
-            <textarea name="description" onChange={handleFormChange} placeholder="Description" className="mx-2 rounded border-2 border-gray-400 w-2/3"/>
+            <textarea name="description" onChange={handleFormChange} placeholder="Description" className="text-black mx-2 rounded border-2 border-gray-400 w-2/3"/>
           </label>
         </div>
         <button className="bg-stone-500 m-2 mt-4 p-2 rounded-md" onClick={saveSection}>Save Section</button>

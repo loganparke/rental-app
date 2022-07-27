@@ -123,11 +123,26 @@ const resolvers = {
       .populate('poi');
       return updatedGuide;
     },
+    deleteGuide: async (parent, args, context) => {
+      if(context.user) {
+        const deletedGuide = await Guide.findOneAndDelete(
+          { _id: args.guideId }
+        );
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: {guides: { _id: args.guideId } } },
+          { new: true }
+        );
+        console.log(updatedUser);
+        return updatedUser;
+      }
+      
+    },
     // WORKS 
     addCategory: async (parent, args, context) => {
       const updatedGuide = await Guide.findOneAndUpdate(
         { _id: args.guideId },
-        { $push: { categories: { name: args.name, description: args.description } } },
+        { $push: { categories: { name: args.name, description: args.description, icon: args.icon } } },
         { new: true }
       ).populate('categories')
       .populate('poi');
@@ -158,7 +173,7 @@ const resolvers = {
     addPoi: async (parent, args, context) => {
       const updatedGuide = await Guide.findOneAndUpdate(
         { _id: args.guideId },
-        { $push: { poi: { name: args.name, lat: args.lat, lng: args.lng } } },
+        { $push: { poi: { name: args.name, type: args.type, address: args.address, lat: args.lat, lng: args.lng } } },
         { new: true }
       );
       return(updatedGuide);
@@ -169,7 +184,16 @@ const resolvers = {
         { $set: { "poi.$.lat": args.lat, "poi.$.lng": args.lng } },
         { new: true }
       ).populate('categories')
-      .populate('poi')
+      .populate('poi');
+      return updatedGuide;
+    },
+    deletePoi: async (parent, args, context) => {
+      const updatedGuide = await Guide.findOneAndUpdate(
+        { _id: args.guideId },
+        { $pull: { poi: { _id: args.poiId } } },
+        { new: true }
+      ).populate('categories')
+      .populate('poi');
       return updatedGuide;
     },
     // WORKS
