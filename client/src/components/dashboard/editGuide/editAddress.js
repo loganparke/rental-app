@@ -32,7 +32,7 @@ const EditAddressComponent = ({guideId}) => {
 
         let geocodeAddress = guideAddress.current.value.split(' ').join('%20').concat('&');
 
-        const newLocation = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${geocodeAddress}key=AIzaSyCnd1TuJv-z-dpDnNruxMPm8WN8BYYaMkA`)
+        const newLocation = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${geocodeAddress}key=`)
         .then(Response => Response.json())
         .then((data) => {
           const newLatLong = data.results[0].geometry.location;

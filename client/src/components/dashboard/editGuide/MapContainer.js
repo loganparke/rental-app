@@ -8,7 +8,7 @@ const MapContainer = ({pois}) => {
   const [state] = useStoreContext();
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: 'AIzaSyCnd1TuJv-z-dpDnNruxMPm8WN8BYYaMkA',
+    googleMapsApiKey: '',
   })
 
   const [map, setMap] = useState( /** @type google.maps.map */ (null));
