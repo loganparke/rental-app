@@ -7,7 +7,7 @@ function GuideMap() {
   const places = state?.guide?.poi;
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: 'AIzaSyCnd1TuJv-z-dpDnNruxMPm8WN8BYYaMkA',
+    googleMapsApiKey: '',
   })
 
   const [map, setMap] = useState( /** @type google.maps.map */ (null));
